@@ -10,7 +10,7 @@ require('dotenv').config();
 app.use(
   cors({
     origin: [
-      'https://shoppingmall-demo-4cef448e629c.netlify.app', // 실제 Netlify 배포 주소
+      'https://shoppingmall-app-demo.netlify.app', // Netlify 실제 배포 주소
       'http://localhost:3000', // 개발용
     ],
     credentials: true,
