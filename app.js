@@ -6,7 +6,16 @@ const indexRouter = require('./routes/index');
 const app = express();
 
 require('dotenv').config();
-app.use(cors());
+// Netlify 배포 주소로만 CORS 허용 (예시: https://shoppingmall-demo.netlify.app)
+app.use(
+  cors({
+    origin: [
+      'https://shoppingmall-demo.netlify.app', // 실제 Netlify 배포 주소로 변경
+      'http://localhost:3000', // 개발용
+    ],
+    credentials: true,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json()); //req.body가 객체로 인식이 됩니다
 
