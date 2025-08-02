@@ -10,7 +10,12 @@ require('dotenv').config();
 // CORS 미들웨어를 가장 먼저 설정
 app.use(
   cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
+    origin: [
+      'http://localhost:3000',
+      'http://127.0.0.1:3000',
+      'https://shoppingmall-app-demo.netlify.app',
+      'https://shoppingmall-demo-4cef448e629c.herokuapp.com',
+    ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
