@@ -7,29 +7,22 @@ const app = express();
 
 require('dotenv').config();
 
-// CORS 설정 수정 - 더 포괄적으로 설정
+// CORS 미들웨어를 가장 먼저 설정
 app.use(
   cors({
-    origin: [
-      'https://shoppingmall-app-demo.netlify.app', // Netlify 실제 배포 주소
-      'http://localhost:3000', // 개발용
-      'http://127.0.0.1:3000', // 로컬 개발용 (대안 주소)
-    ],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'], // 허용할 HTTP 메서드
-    allowedHeaders: ['Content-Type', 'Authorization'], // 허용할 헤더
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
   })
 );
-
-// preflight 요청 처리
-app.options('*', cors());
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use('/api', indexRouter);
 
-// 루트 경로 응답 추가
+// 루트 경로 응답
 app.get('/', (req, res) => {
   res.send('Hello, this is the shopping-mall backend!');
 });
@@ -41,5 +34,5 @@ mongoose
   .catch((err) => console.log('DB connection fail', err));
 
 app.listen(process.env.PORT || 5000, () => {
-  console.log('server on');
+  console.log('server on port', process.env.PORT || 5000);
 });
